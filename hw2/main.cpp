@@ -1,6 +1,6 @@
 struct NullS {};
 
-template <class Head, class Tail>
+template <class Head, class Tail = NullS>
 struct TypeList {
     typedef Head head;
     typedef Tail tail;
@@ -8,22 +8,22 @@ struct TypeList {
 
 template <class T, class TList, int N>
 struct IndexOf {
-	static const int ind = IndexOf<T, class TList::tail, N + 1>::ind;
+    static const int ind = IndexOf<T, class TList::tail, N + 1>::ind;
 };
 
 template <class T, int N>
 struct IndexOf <T, TypeList <T, NullS>, N > {
-	static const int ind = N;
+    static const int ind = N;
 };
 
 template <class T, class Tail, int N>
 struct IndexOf <T, TypeList<T, Tail>, N> {
-	static const int ind = N;
+    static const int ind = N;
 };
 
 template <class T, class Head, int N>
 struct IndexOf <T, TypeList<Head, NullS>, N> {
-	static const int ind = -1;
+    static const int ind = -1;
 };
 
 template <class T, class TList>
